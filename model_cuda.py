@@ -245,7 +245,7 @@ optimizer = torch.optim.Adam(net.parameters(), lr=0.001, betas=(0.9, 0.999), eps
 
 
 def data(i):
-	img=Image.open("./datasets/B100/HR/"+str(i+1)+".png")
+	img=Image.open("./Dset/"+str(i+1)+".png")
 	img=img.convert('RGB')
 	
 	basewidth,hsize=img.size
@@ -295,19 +295,19 @@ for epoch in range(50):  # loop over the dataset multiple times
 
 
 
-		o2n=o2.numpy()[0,:,:,:]
+		o2n=o2.detach().numpy()[0,:,:,:]
 		o2n=np.transpose(o2n,(1,2,0))
 		o2n=np.array(o2n,dtype=np.int8)
 		img = Image.fromarray(o2n, 'RGB')
 		img.save("./result2/"+str(i+1)+'.png')
 
-		o2n=o4.numpy()[0,:,:,:]
+		o2n=o4.detach().numpy()[0,:,:,:]
 		o2n=np.transpose(o2n,(1,2,0))
 		o2n=np.array(o2n,dtype=np.int8)
 		img = Image.fromarray(o2n, 'RGB')
 		img.save("./result4/"+str(i+1)+'.png')
 
-		o2n=o8.numpy()[0,:,:,:]
+		o2n=o8.detach().numpy()[0,:,:,:]
 		o2n=np.transpose(o2n,(1,2,0))
 		o2n=np.array(o2n,dtype=np.int8)
 		img = Image.fromarray(o2n, 'RGB')
