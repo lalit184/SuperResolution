@@ -249,20 +249,24 @@ def data(i):
 	img=img.convert('RGB')
 	
 	basewidth,hsize=img.size
-	
 
-	img0 = img.resize((basewidth//8,hsize//8), Image.LANCZOS)
-	img2 = img.resize((2*(basewidth//8),2*(hsize//8)), Image.LANCZOS)
-	img4 = img.resize((4*(basewidth//8),4*(hsize//8)), Image.LANCZOS)
-	img8 = img.resize((8*(basewidth//8),8*(hsize//8)), Image.LANCZOS)
+	if basewidth<700 and hsize <500:
 
-	img0=np.transpose(np.array(img0),(2,0,1))
-	img2=np.transpose(np.array(img2),(2,0,1))
-	img4=np.transpose(np.array(img4),(2,0,1))
-	img8=np.transpose(np.array(img8),(2,0,1))
+		
 
-	return np.array([img0],dtype=np.float64),np.array([img2],dtype=np.float64),np.array([img4],dtype=np.float64),np.array([img8],dtype=np.float64)
+		img0 = img.resize((basewidth//8,hsize//8), Image.LANCZOS)
+		img2 = img.resize((2*(basewidth//8),2*(hsize//8)), Image.LANCZOS)
+		img4 = img.resize((4*(basewidth//8),4*(hsize//8)), Image.LANCZOS)
+		img8 = img.resize((8*(basewidth//8),8*(hsize//8)), Image.LANCZOS)
 
+		img0=np.transpose(np.array(img0),(2,0,1))
+		img2=np.transpose(np.array(img2),(2,0,1))
+		img4=np.transpose(np.array(img4),(2,0,1))
+		img8=np.transpose(np.array(img8),(2,0,1))
+
+		return np.array([img0],dtype=np.float64),np.array([img2],dtype=np.float64),np.array([img4],dtype=np.float64),np.array([img8],dtype=np.float64)
+	else:	
+		return np.zeros((1,3,basewidth//8,hsize//8)),np.zeros((1,3,2*(basewidth//8),2*(hsize//8))),np.zeros((1,3,4*(basewidth//8),4*(hsize//8))),np.zeros((1,3,8*(basewidth//8),8*(hsize//8)))	
 ssim_loss2 = pytorch_ssim_.SSIM(window_size = 5)
 ssim_loss4 = pytorch_ssim_.SSIM(window_size = 10)
 ssim_loss8 = pytorch_ssim_.SSIM(window_size = 20)
