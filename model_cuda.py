@@ -7,7 +7,6 @@ import torch.optim as optim
 import numpy as np
 import pytorch_ssim_
 from torch.autograd import Variable
-
 class Net(nn.Module):
 
 	def __init__(self):
@@ -184,7 +183,7 @@ class Net(nn.Module):
 		x=self.u8_conv_1a(x)
 		x=F.relu(x)
 		x=self.x81r(x)
-
+		
 
 		x=self.u8_conv_1b(x)
 		x=F.relu(x)
@@ -195,19 +194,17 @@ class Net(nn.Module):
 		x=self.u8_conv_2a(x)
 		x=F.relu(x)
 		x=x=self.x81r_(x)
-
+		
 		x=self.u8_conv_2b(x)
 		x=F.relu(x)
-		x=x=self.x81r_(x)
-
+		x=x=self.x82r_(x)
+		
 		return x
 
 
 
 
 	def forward(self,x):
-		#print("incoming",x.shape)
-		
 		x=self.pre_conv_1a(x)
 		x=F.relu(x)
 		x=self.input_pad(x)
