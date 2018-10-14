@@ -266,6 +266,8 @@ def data(i):
 
 		return np.array([img0],dtype=np.float64),np.array([img2],dtype=np.float64),np.array([img4],dtype=np.float64),np.array([img8],dtype=np.float64)
 	else:	
+		basewidth=480
+		hsize=640
 		return np.zeros((1,3,basewidth//8,hsize//8)),np.zeros((1,3,2*(basewidth//8),2*(hsize//8))),np.zeros((1,3,4*(basewidth//8),4*(hsize//8))),np.zeros((1,3,8*(basewidth//8),8*(hsize//8)))	
 ssim_loss2 = pytorch_ssim_.SSIM(window_size = 5)
 ssim_loss4 = pytorch_ssim_.SSIM(window_size = 10)
