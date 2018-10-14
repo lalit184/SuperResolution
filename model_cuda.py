@@ -284,11 +284,16 @@ for epoch in range(50):  # loop over the dataset multiple times
 		u8=Variable(torch.from_numpy(u8),volatile=True).cuda()
 		
 
-		o2,o4,o8 = net(u0).to("cpu",torch.double)
+		o2,o4,o8 = net(u0)
+		
 		loss =-16*ssim_loss2(o2,u2)+-4*ssim_loss2(o4,u4)+-1*ssim_loss2(o8,u8)
 		loss.backward()
 		optimizer.step()
 
+		o2=o2.to("cpu",torch.double)
+		o4=o4.to("cpu",torch.double)
+		o8=o8.to("cpu",torch.double)
+		
 		torch.cuda.empty_cache()
 
 
