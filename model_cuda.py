@@ -7,6 +7,8 @@ import torch.optim as optim
 import numpy as np
 import pytorch_ssim_
 from torch.autograd import Variable
+import os
+
 class Net(nn.Module):
 
 	def __init__(self):
@@ -244,41 +246,43 @@ net.cuda()
 optimizer = torch.optim.Adam(net.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0, amsgrad=False)
 
 
-def data(i):
-	img=Image.open("./Dset/"+str(i+1)+".png")
-	img=img.convert('RGB')
+def data():
+
+	path = './DIV2K/'
+	files = os.listdir(path)
+	files_txt = [i for i in files if i.endswith('.png')]
+
+	for img_name in files_txt:
+		img=Image.open(path+img_name)
+		img=img.convert('RGB')
+		w,h=img.size
+
+		for i in range(w//600):
+			for j in range(h//600):
+				img=img.crop((i*600,j*600,(i+1)*600,(j+1)*600))
+				img0 = img.resize((basewidth//8,hsize//8), Image.LANCZOS)
+				img2 = img.resize((2*(basewidth//8),2*(hsize//8)), Image.LANCZOS)
+				img4 = img.resize((4*(basewidth//8),4*(hsize//8)), Image.LANCZOS)
+				img8 = img.resize((8*(basewidth//8),8*(hsize//8)), Image.LANCZOS)
+
+				img0=np.transpose(np.array(img0),(2,0,1))
+				img2=np.transpose(np.array(img2),(2,0,1))
+				img4=np.transpose(np.array(img4),(2,0,1))
+				img8=np.transpose(np.array(img8),(2,0,1))
+
+				yield  np.array([img0],dtype=np.float64),np.array([img2],dtype=np.float64),np.array([img4],dtype=np.float64),np.array([img8],dtype=np.float64)
+
 	
-	basewidth,hsize=img.size
-
-	if basewidth<700 and hsize <500:
-
-		
-
-		img0 = img.resize((basewidth//8,hsize//8), Image.LANCZOS)
-		img2 = img.resize((2*(basewidth//8),2*(hsize//8)), Image.LANCZOS)
-		img4 = img.resize((4*(basewidth//8),4*(hsize//8)), Image.LANCZOS)
-		img8 = img.resize((8*(basewidth//8),8*(hsize//8)), Image.LANCZOS)
-
-		img0=np.transpose(np.array(img0),(2,0,1))
-		img2=np.transpose(np.array(img2),(2,0,1))
-		img4=np.transpose(np.array(img4),(2,0,1))
-		img8=np.transpose(np.array(img8),(2,0,1))
-
-		return np.array([img0],dtype=np.float64),np.array([img2],dtype=np.float64),np.array([img4],dtype=np.float64),np.array([img8],dtype=np.float64)
-	else:	
-		basewidth=480
-		hsize=640
-		return np.zeros((1,3,basewidth//8,hsize//8)),np.zeros((1,3,2*(basewidth//8),2*(hsize//8))),np.zeros((1,3,4*(basewidth//8),4*(hsize//8))),np.zeros((1,3,8*(basewidth//8),8*(hsize//8)))	
 ssim_loss2 = pytorch_ssim_.SSIM(window_size = 5)
-ssim_loss4 = pytorch_ssim_.SSIM(window_size = 10)
-ssim_loss8 = pytorch_ssim_.SSIM(window_size = 20)
+ssim_loss4 = pytorch_ssim_.SSIM(window_size = 7)
+ssim_loss8 = pytorch_ssim_.SSIM(window_size = 15)
+
+
 
 for epoch in range(50):  # loop over the dataset multiple times
-	
+	get_img=data()
 	running_loss = 0.0
-	for i in range(2945):
-		# get the inputs
-		u0,u2,u4,u8 = data(i)
+	for u0,u2,u4,u8 in  get_img:
 		optimizer.zero_grad()
 
 		u0=Variable(torch.from_numpy(u0),volatile=True).cuda()
@@ -289,7 +293,7 @@ for epoch in range(50):  # loop over the dataset multiple times
 
 		o2,o4,o8 = net(u0)
 		
-		loss =-16*ssim_loss2(o2,u2)+-4*ssim_loss2(o4,u4)+-1*ssim_loss2(o8,u8)
+		loss =-1*ssim_loss2(o2,u2)+-1*ssim_loss2(o4,u4)+-1*ssim_loss2(o8,u8)
 		loss.backward()
 		optimizer.step()
 
@@ -298,26 +302,6 @@ for epoch in range(50):  # loop over the dataset multiple times
 		o8=o8.to("cpu",torch.double)
 		
 		torch.cuda.empty_cache()
-
-
-
-		o2n=o2.detach().numpy()[0,:,:,:]
-		o2n=np.transpose(o2n,(1,2,0))
-		o2n=np.array(o2n,dtype=np.int8)
-		img = Image.fromarray(o2n, 'RGB')
-		img.save("./result2/"+str(i+1)+'.png')
-
-		o2n=o4.detach().numpy()[0,:,:,:]
-		o2n=np.transpose(o2n,(1,2,0))
-		o2n=np.array(o2n,dtype=np.int8)
-		img = Image.fromarray(o2n, 'RGB')
-		img.save("./result4/"+str(i+1)+'.png')
-
-		o2n=o8.detach().numpy()[0,:,:,:]
-		o2n=np.transpose(o2n,(1,2,0))
-		o2n=np.array(o2n,dtype=np.int8)
-		img = Image.fromarray(o2n, 'RGB')
-		img.save("./result8/"+str(i+1)+'.png')
 
 
 		del u0
