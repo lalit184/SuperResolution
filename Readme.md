@@ -10,7 +10,7 @@ This repository contains the pytorch implementation of a sequential super resolu
 
 The architecture is a progressive upsampler which uses a [Desely connected Convolutional Neural network](https://arxiv.org/abs/1608.06993) as a feature extractor between intermediate steps. DCN in the figure stands for Desely connected Convolutional Neural network. The model is initialised from scratch.
 
-<div style="text-align:center"> <img src="./Assets/architecture.png"> </div>
+<div style="align:center"> <img src="./Assets/architecture.png"> </div>
 
 <center> Architecture of the CNN used </center>
 
