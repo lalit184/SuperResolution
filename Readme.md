@@ -32,14 +32,14 @@ $python3 test.py
 The	above command shall dump 2X,4X and an 8X resolved image in ./result2, ./result4 and ./result8
 
 ## Results
-|                    2X Resolution                    |                  8X Resolution                  |
-| :-------------------------------------------------: | :---------------------------------------------: |
-| <img src="/Assets/image--019.jpg" width ="400">test | <img src="/Assets/image--023.jpg" width ="400"> |
-|   <img src="/Assets/image--021.jpg" width ="400">   | <img src="/Assets/image--025.jpg" width ="400"> |
-|   <img src="/Assets/image--031.jpg" width ="400">   | <img src="/Assets/image--035.jpg" width ="400"> |
-|   <img src="/Assets/image--033.jpg" width ="400">   | <img src="/Assets/image--037.jpg" width ="400"> |
-|   <img src="/Assets/image--043.jpg" width ="400">   | <img src="/Assets/image--047.jpg" width ="400"> |
-|   <img src="/Assets/image--045.jpg" width ="400">   | <img src="/Assets/image--049.jpg" width ="400"> |
+|                             ----                             |                             ---                              |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+| <img src="/Assets/image--019.jpg" width ="400">2X super-resolved | <img src="/Assets/image--023.jpg" width ="400">4X super-resolved |
+| <img src="/Assets/image--021.jpg" width ="400">8X super-resolved |  <img src="/Assets/image--025.jpg" width ="400">Groud Truth  |
+| <img src="/Assets/image--031.jpg" width ="400">2X super-resolved | <img src="/Assets/image--035.jpg" width ="400">4X super-resolved |
+| <img src="/Assets/image--033.jpg" width ="400">8X super-resolved | <img src="/Assets/image--037.jpg" width ="400">Ground Truth  |
+| <img src="/Assets/image--043.jpg" width ="400">2X super-resolved | <img src="/Assets/image--047.jpg" width ="400">2X super-resolved |
+| <img src="/Assets/image--045.jpg" width ="400">8X super-resolved | <img src="/Assets/image--049.jpg" width ="400">Ground Truth  |
 
 
 
