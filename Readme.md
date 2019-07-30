@@ -33,11 +33,11 @@ The	above command shall dump 2X,4X and an 8X resolved image in ./result2, ./resu
 
 ## Results
 
-|                  2X Resolution                  |                  4X Resolution                  |                  8X Resolution                  |                  Ground Truth                   |
-| :---------------------------------------------: | :---------------------------------------------: | :---------------------------------------------: | :---------------------------------------------: |
-| <img src="/Assets/image--019.jpg" width ="300"> | <img src="/Assets/image--021.jpg" width ="300"> | <img src="/Assets/image--023.jpg" width ="300"> | <img src="/Assets/image--025.jpg" width ="300"> |
-| <img src="/Assets/image--031.jpg" width ="300"> | <img src="/Assets/image--033.jpg" width ="300"> | <img src="/Assets/image--035.jpg" width ="300"> | <img src="/Assets/image--037.jpg" width ="300"> |
-| <img src="/Assets/image--043.jpg" width ="200"> | <img src="/Assets/image--045.jpg" width ="200"> | <img src="/Assets/image--047.jpg" width ="200"> | <img src="/Assets/image--049.jpg" width ="200"> |
-|                                                 |                                                 |                                                 |                                                 |
-|                                                 |                                                 |                                                 |                                                 |
-|                                                 |                                                 |                                                 |                                                 |
+|                  2X Resolution                  |                  8X Resolution                  |
+| :---------------------------------------------: | :---------------------------------------------: |
+| <img src="/Assets/image--019.jpg" width ="300"> | <img src="/Assets/image--023.jpg" width ="300"> |
+| <img src="/Assets/image--021.jpg" width ="300"> | <img src="/Assets/image--025.jpg" width ="300"> |
+| <img src="/Assets/image--031.jpg" width ="300"> | <img src="/Assets/image--035.jpg" width ="300"> |
+| <img src="/Assets/image--033.jpg" width ="300"> | <img src="/Assets/image--037.jpg" width ="300"> |
+| <img src="/Assets/image--043.jpg" width ="200"> | <img src="/Assets/image--047.jpg" width ="200"> |
+| <img src="/Assets/image--045.jpg" width ="200"> | <img src="/Assets/image--049.jpg" width ="200"> |
