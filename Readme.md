@@ -6,30 +6,35 @@ This project incorporates a supervised super-resolution scheme by having the pro
 
 This repository contains the pytorch implementation of a sequential super resolution algorithm.The architecture and implementation detail are present in the report in the repository
 
-## Getting Started
-Copy the entire high res training dataset in png format in a folder called data in the working directory
-Copy the low res image to be upscaled in the valid directory in the workspace
+## Architecture
 
-### Prerequisites
-python3
-pytorch
-torchvision 
+The architecture is a progressive upsampler which uses a [Desely connected Convolutional Neural network](https://arxiv.org/abs/1608.06993) as a feature extractor between intermediate steps. DCN in the figure stands for Desely connected Convolutional Neural network. The model is initialised from scratch.
 
-64 GB RAM or more
-Atleast 1 GTX 1080ti or better
+![](./Assets/architecture.png)
 
+<center> Architecture of the CNN used </center>
+## Data Preperation and execution
 
-## Training
+### Training
+
+The only data that you need to provide for the training are the high resolution images. Make sure they are in '.png' format. To kick start the training and generate the checkpoint run the following command.
 
 ```shell
 $python3 tain.py
 ```
+### Testing
 
-## Testing
+Place your low resolution images to be upscaled into the valid folder and expect the reults in the folders 'result2', 'result4' and 'result8'. Feel free to use [our checkpoint](https://drive.google.com/open?id=152qfdtzwZsgrSQZzdVTPRgO3-tIPWgs7) and in that case replace the 'Checkpoint' diirectory with the aforementioned file.
 ```shell
 $python3 test.py
 ```
-The	above command shall dump 2X,4X and an 8X resolved image in ./result2, ./result4 and ./result8
+
+## Getting Started
+Copy the entire high res training dataset in png format in a folder called data in the working directory
+Copy the low res image to be upscaled in the valid directory in the workspace
+
+
+
 
 ## Results
 |                             ----                             |                             ---                              |

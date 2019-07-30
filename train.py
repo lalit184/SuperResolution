@@ -329,7 +329,7 @@ def train():
 			print("step loss is ",loss.item())
 			
 	
-		torch.save(net.state_dict(),"mymodell1.pt")
+		torch.save(net.state_dict(),"./Checkpoint/mymodell1.pt")
 
 
 	print('Finished Training')

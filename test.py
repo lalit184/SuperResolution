@@ -244,7 +244,7 @@ class Net(nn.Module):
 
 
 net=Net()
-net.load_state_dict(torch.load('mymodell1.pt', map_location='cpu'))
+net.load_state_dict(torch.load('./Checkpoint/mymodell1.pt', map_location='cpu'))
 
 
 
