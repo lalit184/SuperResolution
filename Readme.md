@@ -12,7 +12,7 @@ The architecture is a progressive upsampler which uses a [Desely connected Convo
 
 <p align="center"> <img src="./Assets/architecture.png"> </p>
 
- <center> Architecture of the CNN used </center>
+ <p align="center"> Architecture of the CNN used </p>
 
 ## Data Preperation and execution
 
