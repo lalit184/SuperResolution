@@ -41,4 +41,3 @@ The	above command shall dump 2X,4X and an 8X resolved image in ./result2, ./resu
 |                                                 |                                                 |                                                 |                                                 |
 |                                                 |                                                 |                                                 |                                                 |
 |                                                 |                                                 |                                                 |                                                 |
-
